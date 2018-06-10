@@ -1,5 +1,5 @@
-# create-object
-Utility that adds objects to a Redis database as a hash.  It receives notifications from a Redis publish event on a designated channel.  The publish message will contain the JSON object which must be stored in the database.  A hash object is then saved in the database using a key that is determined based on the naming convention of the channel of the published event.
+# append-list
+Utility that appends a value to a list in Redis
 
 ## Technical Summary
 [tbd]
@@ -15,7 +15,7 @@ Download the package to the host computer (desktop or server), then navigate
 to the project's directory on the filesystem using a command-prompt or terminal.
 
 ```
-~/create-object
+~/append-list
 ```
 
 Run the following command to install the node.js dependency modules.
@@ -27,7 +27,7 @@ npm install
 Start the application from the command-prompt or terminal in the project's directory, using the following command.
 
 ```
-node index.js --redisHost localhost --redisPort 6379 --redisInstance 0
+node index.js --redisHost 127.0.0.1 --redisPort 6379 --redisInstance 0
 ```
 
 Take note to change these parameters with the correct values:

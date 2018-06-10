@@ -1,17 +1,14 @@
 
     const path = require('path');
-    const Redis = require('../Redis');
+    const redis = require('../redis');
 
     var redisHost = '127.0.0.1';
     var redisPort = 6379;
     var redisInstance = 0;
-    var redisChannel = 'create:object:company:2';
+    var redisChannel = 'append:list:world';
 
-    var testData = {
-    	property1: 'This is a test property',
-    	property2: 'This is a test property'
-    };
+    var testData = 'business'
 
-    var redisClient = new Redis(redisHost, redisPort, redisInstance);
-    redisClient.publish(redisChannel, JSON.stringify(testData));
+    var redisClient = new redis(redisHost, redisPort, redisInstance);
+    redisClient.publish(redisChannel, testData);
 

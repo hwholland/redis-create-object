@@ -6,13 +6,13 @@
  */
 var argv = require('minimist')(process.argv.slice(2));
 const path = require('path');
-const Redis = require('./Redis');
+const redis = require('./redis');
 
 var redisHost = argv.redisHost;
 var redisPort = argv.redisPort;
 var redisInstance = argv.redisInstance;
-var redisChannel = 'create:object:*';
-var redisClient = new Redis(redisHost, redisPort, redisInstance);
+var redisChannel = 'append:list:*';
+var redisClient = new redis(redisHost, redisPort, redisInstance);
 
 /**
  * The sender is required to publish to a channel which follows a specific
@@ -32,9 +32,9 @@ var redisClient = new Redis(redisHost, redisPort, redisInstance);
  */
 function fnCallback(pattern, channel, message) {
 	pattern = pattern.substring(0, pattern.length - 1);
-	var hashKey = channel.replace(pattern, '');
-	var tempClient = new Redis(redisHost, redisPort, redisInstance);
-	tempClient.save(hashKey, JSON.parse(message));
+	var listKey = channel.replace(pattern, '');
+	var tempClient = new redis(redisHost, redisPort, redisInstance);
+	tempClient.save(listKey, message);
 }
 
 redisClient.subscribe(redisChannel, fnCallback);
